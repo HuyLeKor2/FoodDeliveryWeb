@@ -10,7 +10,7 @@ import com.huyle.DTO.RestaurantDTO;
 import com.huyle.model.Address;
 import com.huyle.model.Restaurant;
 import com.huyle.model.User;
-import com.huyle.repository.AddressReposity;
+import com.huyle.repository.AddressRepository;
 import com.huyle.repository.RestaurantRepository;
 import com.huyle.repository.UserRepository;
 import com.huyle.request.CreateRestaurantRequest;
@@ -23,14 +23,14 @@ public class RestaurantServiceImp implements RestaurantService {
     public RestaurantRepository restaurantRepository;
 
     @Autowired
-    public AddressReposity addressReposity;
+    public AddressRepository addressRepository;
 
     @Autowired
     public UserRepository userRepository;
 
     @Override
     public Restaurant createRestaurant(CreateRestaurantRequest request, User user) {
-        Address address = addressReposity.save(request.getAddress());
+        Address address = addressRepository.save(request.getAddress());
 
         Restaurant restaurant = new Restaurant();
 

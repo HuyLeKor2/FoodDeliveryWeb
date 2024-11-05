@@ -70,7 +70,7 @@ public class CartController {
 	@GetMapping("/cart/")
 	public ResponseEntity<Cart> findUserCart(
 			@RequestHeader("Authorization") String jwt) throws Exception{
-User user=userService.findUserbyJwtToken(jwt);
+        User user = userService.findUserbyJwtToken(jwt);
 		Cart cart = cartService.findCartByUserId(user.getId());
 		return ResponseEntity.ok(cart);
 	}
@@ -78,7 +78,7 @@ User user=userService.findUserbyJwtToken(jwt);
 	@PutMapping("/cart/clear")
 	public ResponseEntity<Cart> cleareCart(
 			@RequestHeader("Authorization") String jwt) throws Exception {
-User user=userService.findUserbyJwtToken(jwt);
+        User user = userService.findUserbyJwtToken(jwt);
 		Cart cart = cartService.clearCart(user.getId());
 		return ResponseEntity.ok(cart);
 	}

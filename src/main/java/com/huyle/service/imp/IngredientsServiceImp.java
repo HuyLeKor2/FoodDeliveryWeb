@@ -1,6 +1,5 @@
 package com.huyle.service.imp;
 
-import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +14,7 @@ import com.huyle.repository.IngredientsCategoryRepository;
 import com.huyle.repository.IngredientsItemRepository;
 
 @Service
-public class IngredientsServiceImplementation implements IngredientsService {
+public class IngredientsServiceImp implements IngredientsService {
 
 	@Autowired
 	private IngredientsCategoryRepository ingredientsCategoryRepository;
