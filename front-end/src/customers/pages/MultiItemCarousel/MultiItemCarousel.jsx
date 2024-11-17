@@ -2,8 +2,8 @@ import React from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import { topMeels } from '../../Data/topMeels';
 import { CarouselItem } from './CarouselItem';
+import { topMeels } from '../../../Data/topMeels';
 export const MultipleItemsCarousel = () => {
   const settings = {
     dots: false,

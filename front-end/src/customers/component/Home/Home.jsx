@@ -1,6 +1,6 @@
 import React from 'react';
 import './HomePage.css';
-import { MultipleItemsCarousel } from '../MultiItemCarousel/MultiItemCarousel';
+import { MultipleItemsCarousel } from '../../pages/MultiItemCarousel/MultiItemCarousel';
 
 export const Home = () => {
   return (

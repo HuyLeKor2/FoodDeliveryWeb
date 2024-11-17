@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import { ThemeProvider } from '@emotion/react';
-import { Navbar } from './component/Navbar/Navbar';
 import darkTheme from './theme/DarkTheme';
 import { CssBaseline } from '@mui/material';
-import { Home } from './component/Home/Home';
 import './index.css';
+import { Navbar } from './customers/component/Navbar/Navbar';
+import { Home } from './customers/component/Home/Home';
 function App() {
   return (
     <ThemeProvider theme={darkTheme}>
