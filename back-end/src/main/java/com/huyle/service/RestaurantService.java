@@ -23,8 +23,8 @@ public interface RestaurantService  {
 
     public Restaurant getRestaurantsByUserId(Long userId) throws Exception;
 
-    public RestaurantDTO addToFavorite(Long restaurantId,User user) throws Exception;//?
-    //tại sao lại là DTO trong addToFavorites
+    public RestaurantDTO addToFavorite(Long restaurantId, User user) throws Exception;//?
+ 
     public Restaurant updateRestaurantStatus(Long id) throws Exception;
 
 }

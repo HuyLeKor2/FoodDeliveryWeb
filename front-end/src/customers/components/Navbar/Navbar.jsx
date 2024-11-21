@@ -40,8 +40,9 @@ const Navbar = () => {
     auth.user?.role === 'ROLE_ADMIN' ||
       auth.user?.role === 'ROLE_RESTAURANT_OWNER'
       ?
-      navigate('/admin/restaurant')
-      :
+      // navigate('/admin/restaurant')
+      // :
+      navigate('/my-profile') :
       navigate('/my-profile');
   };
 

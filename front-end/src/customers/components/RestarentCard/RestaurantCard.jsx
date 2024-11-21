@@ -8,6 +8,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { isPresentInFavorites } from '../../../config/logic';
 import { addToFavorites } from '../../../State/Authentication/Action';
 const RestaurantCard = ({ data, index }) => {
+  // console.log('img', data.images[1]);
+  // console.log(data);
   const navigate = useNavigate();
   const { auth } = useSelector((store) => store);
   const jwt = localStorage.getItem('jwt');
@@ -30,7 +32,7 @@ const RestaurantCard = ({ data, index }) => {
         className={`${data.open ? 'cursor-pointer' : 'cursor-not-allowed'}  relative`}
       >
         <img
-          className='w-full h-[10rem] rounded-t-md object-cover '
+          className='w-full h-[10rem] rounded-t-md object-cover'
           src={data.images[0]}
           alt=''
         />
@@ -45,9 +47,9 @@ const RestaurantCard = ({ data, index }) => {
       <div className='p-4 textPart lg:flex w-full justify-between'>
         <div className='space-y-1'>
           <p className='font-semibold text-lg'>{data.name}</p>
-          {/* <div>
-          <span>{data.rating}</span>
-        </div> */}
+          <div>
+            <span>{data.rating}</span>
+          </div>
           <p className='text-gray-500 text-sm'>
             {data.description.length > 40
               ? data.description.substring(0, 40) + '...'

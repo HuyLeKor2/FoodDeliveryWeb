@@ -2,7 +2,7 @@ import { applyMiddleware, combineReducers, legacy_createStore } from 'redux';
 import authReducer from '../Authentication/Reducer';
 import restaurantReducer from '../Customers/Restaurant/Reducer';
 import { thunk } from 'redux-thunk';
-// import menuItemReducer from '../Customers/Menu/Reducer';
+import menuItemReducer from '../Customers/Menu/Reducer';
 // import cartReducer from '../Customers/Cart/Reducer';
 // import { orderReducer } from '../Customers/Orders/order.reducer';
 // import restaurantsOrderReducer from '../Admin/Order/restaurants.order.reducer';
@@ -11,8 +11,8 @@ import { thunk } from 'redux-thunk';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  // restaurant: restaurantReducer,
-  //   menu: menuItemReducer,
+  restaurant: restaurantReducer,
+  menu: menuItemReducer,
   //   cart: cartReducer,
   //   order: orderReducer,
 

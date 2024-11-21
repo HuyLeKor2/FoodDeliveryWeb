@@ -13,8 +13,8 @@ public class RestaurantDTO {
     private String title;
 
     @Column(length = 1000)//?
-    private List<String> img;
+    private List<String> images;
 
-    private String des;
+    private String description;
     private Long id;
 }
