@@ -39,8 +39,10 @@ public class CartServiceImp implements CartService {
     public CartItem addItemToCart(AddCartItemRequest req, String jwt) throws Exception {
         User user = userService.findUserbyJwtToken(jwt);
 
-        Food food = foodService.findFoodById(req.getFoodId());
-
+        Optional<Food> food = foodRepository.findById(req.getFoodId());
+        if(food.isEmpty()) {
+            throw new Exception("Menu Item not exist with id "+req.getFoodId());
+        }
         Cart cart = findCartByUserId(user.getId());
 
         for (CartItem cartItem : cart.getItems()) {//? coi lại khúc này ( chỉ là check coi đã có hàng, nếu có
@@ -51,22 +53,20 @@ public class CartServiceImp implements CartService {
             }
         }
 
-        Long totalPrice = (long) (req.getQuantity() * req.getQuantity());
-        CartItem savedCartItem = addNewCartItem(food, req.getQuantity(), req.getIngredient(), totalPrice, cart);
-        cart.getItems().add(savedCartItem);
-        return savedCartItem;
-    }
-
-    @Override
-    public CartItem addNewCartItem(Food food, int quantity, List<String> ingredients, Long totalPrice, Cart cart) {
         CartItem newCartItem = new CartItem();
-        newCartItem.setFood(food);
-        newCartItem.setQuantity(quantity);
+        newCartItem.setFood(food.get());
+        newCartItem.setQuantity(req.getQuantity());
         newCartItem.setCart(cart);
-        newCartItem.setIngredients(ingredients);
-        newCartItem.setTotalPrice(totalPrice);
-        cartItemRepository.save(newCartItem);
-        return newCartItem;
+        newCartItem.setIngredients(req.getIngredients());
+        newCartItem.setTotalPrice(req.getQuantity()*food.get().getPrice());
+
+        CartItem savedItem=cartItemRepository.save(newCartItem);
+        cart.getItems().add(savedItem);
+        cartRepository.save(cart);
+
+        return savedItem;
+
+
     }
 
     @Override

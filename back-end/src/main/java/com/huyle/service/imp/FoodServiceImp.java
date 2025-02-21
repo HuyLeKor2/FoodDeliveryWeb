@@ -26,6 +26,7 @@ public class FoodServiceImp implements FoodService {
         food.setCreationDate(new Date());
         food.setDescription(request.getDescription());
         food.setImages(request.getImages());
+        System.out.println("req-controller ----"+request.getImages());
         food.setName(request.getName());
         food.setPrice((long) request.getPrice());
         food.setSeasonal(request.isSeasonal());
@@ -43,8 +44,8 @@ public class FoodServiceImp implements FoodService {
     public void deleteFood(Long foodId) throws Exception {
         Food food = findFoodById(foodId);
         food.setRestaurant(null);;
-		foodRepository.save(food);
-//        foodRepository.delete(food);
+//		foodRepository.save(food);
+        foodRepository.delete(food);
 
     }
 
@@ -55,6 +56,7 @@ public class FoodServiceImp implements FoodService {
                                         boolean isSeasonal,
                                         String foodCategory) {
         List<Food> foods = foodRepository.findByRestaurantId(restaurantId);
+
         if (isVegetarian) {
             foods = filterByVegetarian(foods, isVegetarian);
         }

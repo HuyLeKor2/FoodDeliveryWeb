@@ -48,20 +48,18 @@ const Restaurant = () => {
         restaurantId: id,
       })
     );
-    // dispatch(
-    //   getMenuItemsByRestaurantId({
-    //     jwt: localStorage.getItem('jwt'),
-    //     restaurantId: id,
-    //     seasonal: foodType === 'seasonal',
-    //     vegetarian: foodType === 'vegetarian',
-    //     nonveg: foodType === 'non_vegetarian',
-    //     foodCategory: foodCategory || '',
-    //   })
-    // );
+    dispatch(
+      getMenuItemsByRestaurantId({
+        jwt: localStorage.getItem('jwt'),
+        restaurantId: id,
+        seasonal: foodType === 'seasonal',
+        vegetarian: foodType === 'vegetarian',
+        nonveg: foodType === 'non_vegetarian',
+        foodCategory: foodCategory || '',
+      })
+    );
     dispatch(getRestaurantsCategory({ restaurantId: id, jwt }));
-  }, [id
-    // , foodType, foodCategory
-  ]);
+  }, [id, foodType, foodCategory]);
 
   const handleFilter = (e, value) => {
     const searchParams = new URLSearchParams(location.search);
@@ -74,7 +72,7 @@ const Restaurant = () => {
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-  console.log("restaurant", restaurant);
+  console.log('restaurant', restaurant);
   return (
     <>
       <div className='px-5 lg:px-20 '>
@@ -93,8 +91,10 @@ const Restaurant = () => {
                   alt=''
                 />
               </Grid>
-              <Grid item xs={12}
-              // lg={6}
+              <Grid
+                item
+                xs={12}
+                // lg={6}
               >
                 <img
                   className='w-full h-[40vh] object-cover'
@@ -197,7 +197,7 @@ const Restaurant = () => {
       </div>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      // open={menu.loading || restaurant.loading}
+        // open={menu.loading || restaurant.loading}
       >
         <CircularProgress color='inherit' />
       </Backdrop>

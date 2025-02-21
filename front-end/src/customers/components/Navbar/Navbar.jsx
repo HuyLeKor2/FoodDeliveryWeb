@@ -38,12 +38,11 @@ const Navbar = () => {
 
   const navigateToProfile = (e) => {
     auth.user?.role === 'ROLE_ADMIN' ||
-      auth.user?.role === 'ROLE_RESTAURANT_OWNER'
-      ?
-      // navigate('/admin/restaurant')
-      // :
-      navigate('/my-profile') :
-      navigate('/my-profile');
+    auth.user?.role === 'ROLE_RESTAURANT_OWNER'
+      ? // navigate('/admin/restaurant')
+        // :
+        navigate('/my-profile')
+      : navigate('/my-profile');
   };
 
   const handleCloseAuthModel = () => {
@@ -53,12 +52,11 @@ const Navbar = () => {
     navigate('/');
   };
 
-  // useEffect(()=>{
-  //   if(auth.user?.fullName){
-  //     // handleCloseAuthModel()
-  //   }
-
-  // },[auth.user])
+  useEffect(() => {
+    if (auth.user?.fullName) {
+      handleCloseAuthModel();
+    }
+  }, [auth.user]);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -76,7 +74,6 @@ const Navbar = () => {
             HuyLeFood
           </li>
         </div>
-        {/* <li className="font font-semibold">Home</li> */}
       </div>
       <div className='flex items-center space-x-2 lg:space-x-10'>
         <div className=''>
@@ -133,9 +130,7 @@ const Navbar = () => {
         </div>
 
         <IconButton onClick={navigateToCart}>
-          <Badge color='black'
-          // badgeContent={cart.cartItems.length}
-          >
+          <Badge color='black' badgeContent={cart.cartItems.length}>
             <ShoppingCartIcon className='text-4xl' sx={{ fontSize: '2rem' }} />
           </Badge>
         </IconButton>

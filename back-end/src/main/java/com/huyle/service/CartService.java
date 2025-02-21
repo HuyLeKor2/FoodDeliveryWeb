@@ -22,6 +22,4 @@ public interface CartService {
     public Cart findCartByUserId(Long userId) throws Exception;
 
     public Cart clearCart(Long userId) throws  Exception;
-
-    public CartItem addNewCartItem(Food food, int quantity, List<String> ingredients, Long totalPrice, Cart cart);
 }

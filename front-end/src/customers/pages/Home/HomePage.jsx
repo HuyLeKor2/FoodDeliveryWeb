@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MultipleItemsCarousel } from '../MultiItemCarousel/MultiItemCarousel';
 import { getAllRestaurantsAction } from '../../../State/Customers/Restaurant/restaurant.action';
 import RestaurantCard from '../../components/RestarentCard/RestaurantCard';
+import { findCart } from '../../../State/Customers/Cart/cart.action';
 const HomePage = () => {
   const { auth, restaurant } = useSelector((store) => store);
   const dispatch = useDispatch();

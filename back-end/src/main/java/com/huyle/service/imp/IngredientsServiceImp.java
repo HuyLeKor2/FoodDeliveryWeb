@@ -57,8 +57,8 @@ public class IngredientsServiceImp implements IngredientsService {
 	}
 
 	@Override
-	public List<IngredientCategory> findIngredientsCategoryByRestaurantId(Long id) throws Exception {
-		return ingredientsCategoryRepository.findByRestaurantId(id);
+	public List<IngredientCategory> findIngredientsCategoryByRestaurantId(Long restaurantId) throws Exception {
+		return ingredientsCategoryRepository.findByRestaurantId(restaurantId);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class IngredientsServiceImp implements IngredientsService {
 	@Override
 	public IngredientsItem createIngredientsItem(Long restaurantId,
 												 String ingredientName, Long ingredientCategoryId) throws Exception {
-
+//		System.out.println("is exists-------- item");
 		IngredientCategory category = findIngredientsCategoryById(ingredientCategoryId);
 
 		IngredientsItem isExist = ingredientsItemRepository.
@@ -81,13 +81,12 @@ public class IngredientsServiceImp implements IngredientsService {
 			return isExist;
 		}
 
-		Restaurant restaurant=restaurantService.findRestaurantById(
-				restaurantId);
+		Restaurant restaurant=restaurantService.findRestaurantById(restaurantId);
 		IngredientsItem item=new IngredientsItem();
 		item.setName(ingredientName);
 		item.setRestaurant(restaurant);
 		item.setCategory(category);
-
+		System.out.println("item"+ item);
 		IngredientsItem savedIngredients = ingredientsItemRepository.save(item);
 		category.getIngredients().add(savedIngredients);
 

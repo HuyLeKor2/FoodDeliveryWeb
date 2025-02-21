@@ -1,5 +1,4 @@
 package com.huyle.controller.admin;
-
 import com.huyle.model.Food;
 import com.huyle.model.Restaurant;
 import com.huyle.model.User;
@@ -28,7 +27,8 @@ public class AdminFoodController {
             @RequestBody CreateFoodRequest req,
             @RequestHeader("Authorization") String jwt
     ) throws Exception{
-        User user  = userService.findUserbyJwtToken(jwt);
+        System.out.println("req-controller ----"+req);
+//        User user  = userService.findUserbyJwtToken(jwt);
         Restaurant restaurant = restaurantService.findRestaurantById(req.getRestaurantId());
         Food food = foodService.createFood(req, req.getCategory(), restaurant);
         return new ResponseEntity<>(food, HttpStatus.CREATED);

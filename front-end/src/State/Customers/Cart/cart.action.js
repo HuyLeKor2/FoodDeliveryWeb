@@ -1,5 +1,4 @@
-
-import { api } from "../../../config/api";
+import { api } from '../../../config/api';
 import {
   findCartFailure,
   findCartRequest,
@@ -7,8 +6,21 @@ import {
   getAllCartItemsFailure,
   getAllCartItemsRequest,
   getAllCartItemsSuccess,
-} from "./ActionCreators";
-import { ADD_ITEM_TO_CART_FAILURE, ADD_ITEM_TO_CART_REQUEST, ADD_ITEM_TO_CART_SUCCESS, CLEARE_CART_FAILURE, CLEARE_CART_REQUEST, CLEARE_CART_SUCCESS, REMOVE_CARTITEM_FAILURE, REMOVE_CARTITEM_REQUEST, REMOVE_CARTITEM_SUCCESS, UPDATE_CARTITEM_FAILURE, UPDATE_CARTITEM_REQUEST, UPDATE_CARTITEM_SUCCESS } from "./ActionTypes";
+} from './ActionCreators';
+import {
+  ADD_ITEM_TO_CART_FAILURE,
+  ADD_ITEM_TO_CART_REQUEST,
+  ADD_ITEM_TO_CART_SUCCESS,
+  CLEARE_CART_FAILURE,
+  CLEARE_CART_REQUEST,
+  CLEARE_CART_SUCCESS,
+  REMOVE_CARTITEM_FAILURE,
+  REMOVE_CARTITEM_REQUEST,
+  REMOVE_CARTITEM_SUCCESS,
+  UPDATE_CARTITEM_FAILURE,
+  UPDATE_CARTITEM_REQUEST,
+  UPDATE_CARTITEM_SUCCESS,
+} from './ActionTypes';
 
 export const findCart = (token) => {
   return async (dispatch) => {
@@ -19,8 +31,10 @@ export const findCart = (token) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log('my cart', response.data);
       dispatch(findCartSuccess(response.data));
     } catch (error) {
+      console.log('error', error);
       dispatch(findCartFailure(error));
     }
   };
@@ -51,11 +65,10 @@ export const addItemToCart = (reqData) => {
           Authorization: `Bearer ${reqData.token}`,
         },
       });
-      console.log("add item to cart ", data)
+      console.log('add item to cart ', data);
       dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload: data });
-
     } catch (error) {
-      console.log("catch error ", error)
+      console.log('catch error ', error);
       dispatch({ type: ADD_ITEM_TO_CART_FAILURE, payload: error.message });
     }
   };
@@ -70,11 +83,10 @@ export const updateCartItem = (reqData) => {
           Authorization: `Bearer ${reqData.jwt}`,
         },
       });
-      console.log("update cartItem ", data)
+      console.log('update cartItem ', data);
       dispatch({ type: UPDATE_CARTITEM_SUCCESS, payload: data });
-
     } catch (error) {
-      console.log("catch error ", error)
+      console.log('catch error ', error);
       dispatch({ type: UPDATE_CARTITEM_FAILURE, payload: error.message });
     }
   };
@@ -89,11 +101,10 @@ export const removeCartItem = ({ cartItemId, jwt }) => {
           Authorization: `Bearer ${jwt}`,
         },
       });
-      console.log("remove cartItem ", data)
+      console.log('remove cartItem ', data);
       dispatch({ type: REMOVE_CARTITEM_SUCCESS, payload: cartItemId });
-
     } catch (error) {
-      console.log("catch error ", error)
+      console.log('catch error ', error);
       dispatch({ type: REMOVE_CARTITEM_FAILURE, payload: error.message });
     }
   };
@@ -103,18 +114,21 @@ export const clearCartAction = () => {
   return async (dispatch) => {
     dispatch({ type: CLEARE_CART_REQUEST });
     try {
-      const { data } = await api.put(`/api/cart/clear`, {}, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-        },
-      });
+      const { data } = await api.put(
+        `/api/cart/clear`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          },
+        }
+      );
 
       dispatch({ type: CLEARE_CART_SUCCESS, payload: data });
-      console.log("clear cart ", data)
+      console.log('clear cart ', data);
     } catch (error) {
-      console.log("catch error ", error)
+      console.log('catch error ', error);
       dispatch({ type: CLEARE_CART_FAILURE, payload: error.message });
     }
   };
 };
-
