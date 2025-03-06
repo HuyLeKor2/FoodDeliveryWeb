@@ -7,20 +7,23 @@ import './index.css';
 import HomePage from './customers/pages/Home/HomePage';
 import Navbar from './customers/components/Navbar/Navbar';
 import CustomerRoutes from './Routers/CustomerRoutes';
-import { getAllRestaurantsAction, getRestaurantByUserId } from './State/Customers/Restaurant/restaurant.action';
+import {
+  getAllRestaurantsAction,
+  getRestaurantByUserId,
+} from './State/Customers/Restaurant/restaurant.action';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getUser } from './State/Authentication/Action';
+import { findCart } from './State/Customers/Cart/cart.action';
 function App() {
   const dispatch = useDispatch();
   const { auth } = useSelector((store) => store);
-  const jwt = localStorage.getItem("jwt");
+  const jwt = localStorage.getItem('jwt');
 
   useEffect(() => {
-
     if (jwt) {
       dispatch(getUser(jwt));
-      // dispatch(findCart(jwt));
+      dispatch(findCart(jwt));
       // dispatch(getAllRestaurantsAction(jwt));
     }
   }, [auth.jwt]);

@@ -94,7 +94,7 @@ public class RestaurantServiceImp implements RestaurantService {
     public Restaurant getRestaurantsByUserId(Long userId) throws Exception {
         Restaurant restaurants = restaurantRepository.findByOwnerId(userId);
         if(restaurants == null) {
-            throw new Exception("restaurant not found with OwnerId" + userId);
+            throw new Exception("restaurant not found with OwnerId: " + userId);
         }
         return restaurants;
     }
@@ -104,9 +104,9 @@ public class RestaurantServiceImp implements RestaurantService {
         Restaurant restaurant=findRestaurantById(restaurantId);
         RestaurantDTO dto = new RestaurantDTO();
         dto.setTitle(restaurant.getName());
-        dto.setImg(restaurant.getImages());
+        dto.setImages(restaurant.getImages());
         dto.setId(restaurant.getId());
-        dto.setDes(restaurant.getDescription());
+        dto.setDescription(restaurant.getDescription());
 
         boolean isChecked = false;
         List<RestaurantDTO> favorites = user.getFavorites();
@@ -126,8 +126,8 @@ public class RestaurantServiceImp implements RestaurantService {
     }
 
     @Override
-    public Restaurant updateRestaurantStatus(Long id) throws Exception {
-        Restaurant restaurant = findRestaurantById(id);
+    public Restaurant updateRestaurantStatus(Long restaurantId) throws Exception {
+        Restaurant restaurant = findRestaurantById(restaurantId);
         restaurant.setOpen(!restaurant.isOpen());
         return restaurantRepository.save(restaurant);
     }

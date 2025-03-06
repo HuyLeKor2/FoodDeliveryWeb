@@ -4,6 +4,8 @@ import { Divider } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import UsersAddresses from '../UsersAdresses/UsersAddresses';
 import UserProfile from './UserProfile';
+import Favorite from '../Favorite/Favorite';
+import Orders from '../Orders/Orders';
 
 const Profile = () => {
   return (
@@ -15,9 +17,9 @@ const Profile = () => {
       <div className='lg:w-[80%]'>
         <Routes>
           <Route path='/' element={<UserProfile />} />
-          {/* <Route path='/orders' element={<Orders />} /> */}
+          <Route path='/orders' element={<Orders />} />
           <Route path='/address' element={<UsersAddresses />} />
-          {/* <Route path='/favorites' element={<Favorite />} /> */}
+          <Route path='/favorites' element={<Favorite />} />
           {/* <Route path='/payments' element={<Orders />} /> */}
           {/* <Route path='/events' element={<CustomerEvents />} /> */}
           {/* <Route path='/notification' element={<Notifications />} /> */}

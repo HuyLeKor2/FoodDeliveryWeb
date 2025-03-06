@@ -6,10 +6,12 @@ import com.huyle.repository.CategoryRepository;
 import com.huyle.service.CategoryService;
 import com.huyle.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CategoryServiceImp implements CategoryService {
     @Autowired
     private RestaurantService restaurantService;
@@ -28,9 +30,8 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public List<Category> findCategoryByRestaurantId(Long id) throws Exception {
-        Restaurant restaurant=restaurantService.getRestaurantsByUserId(id);
-        return categoryRepository.findByRestaurantId(restaurant.getId());
+    public List<Category> findCategoryByRestaurantId(Long restaurantId) throws Exception {
+        return categoryRepository.findByRestaurantId(restaurantId);
     }
 
     @Override

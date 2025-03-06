@@ -23,14 +23,14 @@ public class IngredientsController {
 	@PostMapping("/category")
 	public ResponseEntity<IngredientCategory> createIngredientCategory(
 			@RequestBody CreateIngredientCategoryRequest req) throws Exception{
+		System.out.println("is exists-------- item");
 		IngredientCategory items=ingredientService.createIngredientsCategory(req.getName(), req.getRestaurantId());
 		return new ResponseEntity<>(items,HttpStatus.OK);
 	}
 
-	@PostMapping()
-	public ResponseEntity<IngredientsItem> createIngredient(
+	@PostMapping("/create")
+	public ResponseEntity<IngredientsItem> createIngredientItem(
 			@RequestBody CreateIngredientRequest req) throws Exception{
-
 		IngredientsItem item=ingredientService.createIngredientsItem(req.getRestaurantId(),req.getName(),req.getIngredientCategoryId());
 		return new ResponseEntity<>(item,HttpStatus.OK);
 	}

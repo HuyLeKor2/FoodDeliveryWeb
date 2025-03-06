@@ -2,6 +2,7 @@ package com.huyle.controller;
 
 import com.huyle.model.Category;
 import com.huyle.model.User;
+import com.huyle.model.Category;
 import com.huyle.service.CategoryService;
 import com.huyle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api")
 public class CategoryController {
     @Autowired
     public CategoryService categoryService;
@@ -30,9 +33,10 @@ public class CategoryController {
 
     @GetMapping("/category/restaurant/{id}")
     public ResponseEntity<List<Category>> getRestaurantsCategory(
+            @PathVariable Long id,
             @RequestHeader("Authorization")String jwt) throws Exception {
         User user=userService.findUserbyJwtToken(jwt);
-        List<Category> categories=categoryService.findCategoryByRestaurantId(user.getId());
-        return new ResponseEntity<>(categories, HttpStatus.OK);
+        List<Category> categories=categoryService.findCategoryByRestaurantId(id);
+        return new ResponseEntity<>(categories,HttpStatus.OK);
     }
 }

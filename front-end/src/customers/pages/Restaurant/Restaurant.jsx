@@ -16,19 +16,10 @@ import {
   getRestaurantById,
   getRestaurantsCategory,
 } from '../../../State/Customers/Restaurant/restaurant.action';
-// import { getMenuItemsByRestaurantId } from '../../../State/Customers/Menu/menu.action';
+import { getMenuItemsByRestaurantId } from '../../../State/Customers/Menu/menu.action';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import TodayIcon from '@mui/icons-material/Today';
-
-const categories = [
-  'Thali',
-  'Starters',
-  'Indian Main Course',
-  'Rice and Biryani',
-  'Breads',
-  'Accompaniments',
-  'Dessert',
-];
+import MenuItemCard from '../../components/MenuItem/MenuItemCard';
 
 const foodTypes = [
   { label: 'All', value: 'all' },
@@ -41,6 +32,7 @@ const Restaurant = () => {
   const location = useLocation();
   const { id } = useParams();
   const { restaurant, menu } = useSelector((store) => store);
+
   const navigate = useNavigate();
 
   const decodedQueryString = decodeURIComponent(location.search);
@@ -56,16 +48,16 @@ const Restaurant = () => {
         restaurantId: id,
       })
     );
-    // dispatch(
-    //   getMenuItemsByRestaurantId({
-    //     jwt: localStorage.getItem('jwt'),
-    //     restaurantId: id,
-    //     seasonal: foodType === 'seasonal',
-    //     vegetarian: foodType === 'vegetarian',
-    //     nonveg: foodType === 'non_vegetarian',
-    //     foodCategory: foodCategory || '',
-    //   })
-    // );
+    dispatch(
+      getMenuItemsByRestaurantId({
+        jwt: localStorage.getItem('jwt'),
+        restaurantId: id,
+        seasonal: foodType === 'seasonal',
+        vegetarian: foodType === 'vegetarian',
+        nonveg: foodType === 'non_vegetarian',
+        foodCategory: foodCategory || '',
+      })
+    );
     dispatch(getRestaurantsCategory({ restaurantId: id, jwt }));
   }, [id, foodType, foodCategory]);
 
@@ -80,7 +72,7 @@ const Restaurant = () => {
     const query = searchParams.toString();
     navigate({ search: `?${query}` });
   };
-
+  console.log('restaurant', restaurant);
   return (
     <>
       <div className='px-5 lg:px-20 '>
@@ -99,20 +91,24 @@ const Restaurant = () => {
                   alt=''
                 />
               </Grid>
-              <Grid item xs={12} lg={6}>
+              <Grid
+                item
+                xs={12}
+                // lg={6}
+              >
                 <img
                   className='w-full h-[40vh] object-cover'
                   src={restaurant.restaurant?.images[1]}
                   alt=''
                 />
               </Grid>
-              <Grid item xs={12} lg={6}>
+              {/* <Grid item xs={12} lg={6}>
                 <img
                   className='w-full h-[40vh] object-cover'
                   src={restaurant.restaurant?.images[2]}
                   alt=''
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
           </div>
           <div className='pt-3 pb-5'>
@@ -191,17 +187,17 @@ const Restaurant = () => {
               </div>
             </div>
           </div>
+
           <div className='lg:w-[80%] space-y-5 lg:pl-10'>
-            {/* {menu?.menuItems.map((item) => (
+            {menu?.menuItems.map((item) => (
               <MenuItemCard item={item} />
-              // <p>ashok</p>
-            ))} */}
+            ))}
           </div>
         </section>
       </div>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={menu.loading || restaurant.loading}
+        // open={menu.loading || restaurant.loading}
       >
         <CircularProgress color='inherit' />
       </Backdrop>

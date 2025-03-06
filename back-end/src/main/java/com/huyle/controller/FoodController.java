@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/food")
@@ -38,17 +39,17 @@ public class FoodController {
         return new ResponseEntity<>(foods, HttpStatus.CREATED);
     }
 
-    @PostMapping("/restaurant/{restaurantId}")
+    @GetMapping("/restaurant/{restaurantId}")
     public ResponseEntity<List<Food>> getRestaurantFood(
-            @RequestParam boolean isVegetarian,
-            @RequestParam boolean seasonal,
-            @RequestParam boolean nonveg,
-            @PathVariable Long RestaurantId,
-            @RequestParam(required = false) String food_category,
+            @PathVariable Long restaurantId,
+            @RequestParam (required = false) boolean vegetarian,
+            @RequestParam (required = false) boolean seasonal,
+            @RequestParam (required = false) boolean nonveg,
+            @RequestParam (required = false) String food_category,
             @RequestHeader("Authorization") String jwt
     ) throws Exception{
         User user  = userService.findUserbyJwtToken(jwt);
-        List<Food> foods = foodService.getRestaurantFood(RestaurantId,isVegetarian,nonveg,seasonal,food_category);
-        return new ResponseEntity<>(foods, HttpStatus.CREATED);
+        List<Food> foods = foodService.getRestaurantFood(restaurantId,vegetarian,nonveg,seasonal,food_category);
+        return new ResponseEntity<>(foods, HttpStatus.OK);
     }
 }
