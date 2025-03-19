@@ -5,6 +5,7 @@ import Navbar from '../customers/components/Navbar/Navbar';
 import Profile from '../customers/pages/Profile/Profile';
 import Restaurant from '../customers/pages/Restaurant/Restaurant';
 import Cart from '../customers/pages/Cart/Cart';
+import PaymentSuccess from '../customers/pages/PaymentSuccess/PaymentSuccess';
 const CustomerRoutes = () => {
   return (
     <div className='relative'>
@@ -20,7 +21,7 @@ const CustomerRoutes = () => {
           element={<Restaurant />}
         />
         <Route path='/cart' element={<Cart />} />
-        {/* <Route path='/payment/success/:id' element={<PaymentSuccess />} /> */}
+        <Route path='/payment/success/:id' element={<PaymentSuccess />} />
         <Route path='/my-profile/*' element={<Profile />} />
         {/* <Route path='/search' element={<Search />} />
         <Route
