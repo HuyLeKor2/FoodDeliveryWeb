@@ -13,12 +13,16 @@ import com.huyle.service.FoodService;
 import com.huyle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CartServiceImp implements CartService {
+
+    private static final Logger logger = LoggerFactory.getLogger(CartServiceImp.class);
 
     @Autowired
     private CartRepository cartRepository;
@@ -119,7 +123,11 @@ public class CartServiceImp implements CartService {
 
     @Override
     public Cart findCartByUserId(Long userId) throws Exception {
-        return cartRepository.findByCustomerId(userId).get();
+        Optional<Cart> opt=cartRepository.findByCustomerId(userId);
+		if(opt.isPresent()) {
+			return opt.get();
+		}
+        throw new Exception("cart not found");
     }
 
     @Override

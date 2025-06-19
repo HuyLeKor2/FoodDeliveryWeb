@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.huyle.model.Cart;
 import com.huyle.model.CartItem;
-import com.huyle.model.Food;
 import com.huyle.model.User;
 import com.huyle.request.AddCartItemRequest;
 import com.huyle.request.UpdateCartItemRequest;
@@ -56,14 +54,14 @@ public class CartController {
 	}
 
 	@GetMapping("/cart/total")
-	public ResponseEntity<Double> calculateCartTotals(@RequestParam Long cartId,
+	public ResponseEntity<Long> calculateCartTotals(@RequestParam Long cartId,
 			@RequestHeader("Authorization") String jwt) throws Exception {
 
 		
 		User user = userService.findUserbyJwtToken(jwt);
 		
 		Cart cart =cartService.findCartByUserId(user.getId());
-		double total = cartService.calculateCartTotals(cart);
+		Long total = cartService.calculateCartTotals(cart);
 		return ResponseEntity.ok(total);
 	}
 	
