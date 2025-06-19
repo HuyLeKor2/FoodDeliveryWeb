@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getUser } from './State/Authentication/Action';
 import { findCart } from './State/Customers/Cart/cart.action';
+import Routers from './Routers/Routers';
+
 function App() {
   const dispatch = useDispatch();
   const { auth } = useSelector((store) => store);
@@ -28,17 +30,20 @@ function App() {
     }
   }, [auth.jwt]);
 
-  // useEffect(() => {
-  //   if (auth.user?.role == "ROLE_RESTAURANT_OWNER") {
-  //     dispatch(getRestaurantByUserId(auth.jwt || jwt));
-  //   }
-  // }, [auth.user]);
+  // Load restaurant data for restaurant owners
+  useEffect(() => {
+    if (auth.user?.role === 'ROLE_RESTAURANT_OWNER') {
+      console.log('Loading restaurant data for user:', auth.user.email);
+      dispatch(getRestaurantByUserId(auth.jwt || jwt));
+    }
+  }, [auth.user, auth.jwt, jwt]);
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       {/* <Navbar /> */}
       {/* <HomePage /> */}
-      <CustomerRoutes />
+      <Routers />
     </ThemeProvider>
   );
 }

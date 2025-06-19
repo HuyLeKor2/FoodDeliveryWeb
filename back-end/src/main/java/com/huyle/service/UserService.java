@@ -7,4 +7,6 @@ public interface UserService {
 
     public User findUserbyEmail(String email) throws Exception;
 
+    public User findUserById(Long id) throws Exception;
+
 }

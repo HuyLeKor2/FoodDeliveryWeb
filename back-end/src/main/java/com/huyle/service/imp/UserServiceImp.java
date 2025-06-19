@@ -32,4 +32,14 @@ public class UserServiceImp implements UserService {
         }
         return user;
     }
+
+    @Override
+    public User findUserById(Long id) throws Exception {
+        User user = userRepository.findById(id).orElse(null);
+
+        if(user == null) {
+            throw new Exception("User not found with id: " + id);
+        }
+        return user;
+    }
 }

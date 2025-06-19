@@ -14,7 +14,7 @@ export const createRestaurantFailure = (error) => ({
   payload: error,
 });
 
-
+// Get All Restaurants Actions (similar structure for other actions)
 export const getAllRestaurantsRequest = () => ({
   type: actionTypes.GET_ALL_RESTAURANTS_REQUEST,
 });
